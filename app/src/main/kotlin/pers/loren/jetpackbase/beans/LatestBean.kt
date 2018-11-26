@@ -1,4 +1,4 @@
-package pers.loren.jetpackbase
+package pers.loren.jetpackbase.beans
 
 /**
  * Created by loren on 2018-11-26

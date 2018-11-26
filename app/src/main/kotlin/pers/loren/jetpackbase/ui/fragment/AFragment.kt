@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.view.View
 import androidx.navigation.Navigation
-import pers.loren.jetpackbase.LatestBean
+import pers.loren.jetpackbase.beans.LatestBean
 import pers.loren.jetpackbase.R
 import pers.loren.jetpackbase.base.ext.log
 import pers.loren.jetpackbase.base.ui.BaseFragment

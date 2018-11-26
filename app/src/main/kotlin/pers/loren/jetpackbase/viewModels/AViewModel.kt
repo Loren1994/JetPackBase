@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.google.gson.reflect.TypeToken
-import pers.loren.jetpackbase.LatestBean
+import pers.loren.jetpackbase.beans.LatestBean
 import pers.loren.jetpackbase.base.ext.LATEST_URL
 import pers.loren.jetpackbase.base.ext.http
 import pers.loren.jetpackbase.base.ext.parseObject
