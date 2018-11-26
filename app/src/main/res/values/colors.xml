@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">@color/main</color>
+    <color name="colorPrimaryDark">@color/status_bar</color>
+    <color name="colorAccent">@color/main</color>
+
+    <color name="main">#777788</color>
+    <color name="match">#6F9183</color>
+    <color name="purple_dark">#666699</color>
+    <color name="gray_dark">#445964</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="status_bar">#444444</color>
+    <color name="background_grey">#ececec</color>
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="blue">#38abfc</color>
+    <color name="trans_blue">#a038abfc</color>
+    <color name="green">#68d559</color>
+    <color name="green_dark">#57b54c</color>
+    <color name="yellow">#b09834</color>
+    <color name="orange">#ffb018</color>
+    <color name="orange2">#f26c13</color>
+    <color name="red">#e35152</color>
+    <color name="trans_red">#a0e35152</color>
+    <color name="purple">#786ef7</color>
+    <color name="text_black">#333333</color>
+    <color name="text_common">#808080</color>
+    <color name="text_white">#f8f8f8</color>
+    <color name="line">#bbbbbb</color>
+    <color name="background">#f4f7f6</color>
+    <color name="grey">#666666</color>
+    <color name="trans_black">#a0333333</color>
+</resources>

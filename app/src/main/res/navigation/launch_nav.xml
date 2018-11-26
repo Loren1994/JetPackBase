@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/launch_nav"
+    app:startDestination="@id/AFragment">
+
+    <fragment
+        android:id="@+id/AFragment"
+        android:name="pers.loren.jetpackbase.ui.fragment.AFragment"
+        android:label="AFragment"
+        tools:layout="@layout/a_fragment">
+        <action
+            android:id="@+id/action_AFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="pers.loren.jetpackbase.ui.fragment.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <argument
+            android:name="text"
+            android:defaultValue="Hello"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_LoginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="pers.loren.jetpackbase.ui.fragment.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/register_fragment" />
+    <fragment
+        android:id="@+id/BFragment"
+        android:name="pers.loren.jetpackbase.ui.fragment.BFragment"
+        android:label="BFragment"
+        tools:layout="@layout/b_fragment" />
+    <fragment
+        android:id="@+id/CFragment"
+        android:name="pers.loren.jetpackbase.ui.fragment.CFragment"
+        android:label="CFragment"
+        tools:layout="@layout/c_fragment" />
+    <fragment
+        android:id="@+id/DFragment"
+        android:name="pers.loren.jetpackbase.ui.fragment.DFragment"
+        android:label="DFragment"
+        tools:layout="@layout/d_fragment" />
+</navigation>
