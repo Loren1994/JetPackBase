@@ -25,4 +25,8 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="InputHintText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
 </resources>

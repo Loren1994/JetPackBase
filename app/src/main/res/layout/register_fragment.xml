@@ -17,48 +17,55 @@
         android:textStyle="bold"
         android:transitionName="title" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/account_edt"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
-        android:hint="请输入账号"
-        android:lines="1"
+        android:padding="3dp"
         android:transitionName="one_input"
-        app:met_clearButton="true"
-        app:met_floatingLabel="highlight"
-        app:met_floatingLabelText="账号"
-        app:met_iconLeft="@drawable/ic_wifi"
-        app:met_maxCharacters="20"
-        app:met_minCharacters="1"
-        app:met_primaryColor="@color/red" />
+        app:hintTextAppearance="@style/InputHintText">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/pwd_edt"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/account_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:hint="账号"
+            android:inputType="number"
+            android:lines="1" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="请输入密码"
-        android:inputType="textPassword"
-        android:lines="1"
+        android:padding="3dp"
         android:transitionName="two_input"
-        app:met_clearButton="true"
-        app:met_floatingLabel="highlight"
-        app:met_floatingLabelText="密码"
-        app:met_iconLeft="@drawable/ic_pwd"
-        app:met_maxCharacters="20"
-        app:met_minCharacters="1"
-        app:met_primaryColor="@color/red" />
+        app:hintTextAppearance="@style/InputHintText">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/pwd_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:lines="1" />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:background="@color/orange"
         android:text="立即注册"

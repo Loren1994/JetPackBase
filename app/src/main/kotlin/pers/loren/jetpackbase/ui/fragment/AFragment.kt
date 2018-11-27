@@ -1,17 +1,19 @@
 package pers.loren.jetpackbase.ui.fragment
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.view.View
 import androidx.navigation.Navigation
-import pers.loren.jetpackbase.beans.LatestBean
 import pers.loren.jetpackbase.R
 import pers.loren.jetpackbase.base.ext.log
 import pers.loren.jetpackbase.base.ui.BaseFragment
 import pers.loren.jetpackbase.interfaces.IHomeChangeFragment
 import pers.loren.jetpackbase.lifecycleObserver.LauncherVisibleObserver
-import pers.loren.jetpackbase.viewModels.AViewModel
+import pers.loren.jetpackbase.repository.LatestRepository
+import pers.loren.jetpackbase.viewModels.LatestViewModel
 
 /**
  * Copyright © 2018/11/23 by loren
@@ -33,10 +35,17 @@ class AFragment : BaseFragment() {
             val bundle = LoginFragmentArgs.Builder().setText("登录").build().toBundle()
             Navigation.findNavController(titleBar!!).navigate(R.id.action_AFragment_to_LoginFragment, bundle)
         }
-        val viewModel = ViewModelProvider.NewInstanceFactory().create(AViewModel::class.java)
-        viewModel.getData().observe(this, Observer<MutableList<LatestBean>> {
+
+        val latestVM = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return LatestViewModel(LatestRepository()) as T
+            }
+        })[LatestViewModel::class.java]
+        latestVM.data.observe(this, Observer {
             log("UI:${it?.size}")
         })
+        latestVM.getLatest()
+
     }
 
     override fun setListeners() {

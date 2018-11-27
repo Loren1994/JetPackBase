@@ -1,23 +1,19 @@
-package pers.loren.jetpackbase.viewModels
+package pers.loren.jetpackbase.repository
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import com.google.gson.reflect.TypeToken
-import pers.loren.jetpackbase.beans.LatestBean
 import pers.loren.jetpackbase.base.ext.LATEST_URL
 import pers.loren.jetpackbase.base.ext.http
 import pers.loren.jetpackbase.base.ext.parseObject
-
+import pers.loren.jetpackbase.beans.LatestBean
 
 /**
- * Copyright © 2018/11/26 by loren
+ * Copyright © 2018/11/27 by loren
  */
-class AViewModel : ViewModel() {
+class LatestRepository {
+    var data: MutableLiveData<MutableList<LatestBean>> = MutableLiveData()
 
-    private var data: MutableLiveData<MutableList<LatestBean>> = MutableLiveData()
-
-    fun getData(): LiveData<MutableList<LatestBean>> {
+    fun getLatestList() {
         http {
             url = LATEST_URL
             success = {
@@ -26,6 +22,5 @@ class AViewModel : ViewModel() {
             }
             fail = { }
         }
-        return data
     }
 }
