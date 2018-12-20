@@ -1,12 +1,18 @@
 package pers.loren.jetpackbase.ui.activity
 
+import android.support.design.internal.BottomNavigationItemView
+import android.support.v4.app.Fragment
 import android.view.View
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import kotlinx.android.synthetic.main.launcher_activity.*
 import pers.loren.jetpackbase.R
 import pers.loren.jetpackbase.base.ui.BaseActivity
-import pers.loren.jetpackbase.interfaces.IHomeChangeFragment
+import pers.loren.jetpackbase.ui.fragment.AFragment
+import pers.loren.jetpackbase.ui.fragment.BFragment
+import pers.loren.jetpackbase.ui.fragment.CFragment
+import pers.loren.jetpackbase.ui.fragment.DFragment
 import pers.victor.ext.getStatusBarHeight
 import pers.victor.ext.setPaddingTop
 
@@ -20,16 +26,10 @@ import pers.victor.ext.setPaddingTop
  * Paging
  * Room
  * WorkerManager
+ * ****************
+ * 每次切换导航会刷新fragment
  */
-class LauncherActivity : BaseActivity(), IHomeChangeFragment {
-
-    override fun visible() {
-        bottom_nav.visibility = View.VISIBLE
-    }
-
-    override fun gone() {
-        bottom_nav.visibility = View.GONE
-    }
+class LauncherActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return super.onSupportNavigateUp()
@@ -43,6 +43,18 @@ class LauncherActivity : BaseActivity(), IHomeChangeFragment {
         parent_ll.setPaddingTop(getStatusBarHeight())
         val navController = Navigation.findNavController(this, R.id.main_nav_fragment)
         NavigationUI.setupWithNavController(bottom_nav, navController)
+        //会返回到上一次点击的导航页
+//        bottom_nav.setOnNavigationItemSelectedListener { item ->
+//            onNavDestinationSelected(item, navController)
+//        }
+        navController.addOnNavigatedListener { _, destination ->
+            when (destination.id) {
+                R.id.AFragment, R.id.BFragment, R.id.CFragment, R.id.DFragment -> {
+                    bottom_nav.visibility = View.VISIBLE
+                }
+                else -> bottom_nav.visibility = View.GONE
+            }
+        }
     }
 
     override fun setListeners() {

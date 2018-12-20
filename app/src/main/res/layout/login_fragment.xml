@@ -17,6 +17,7 @@
         android:transitionName="title" />
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/account_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,6 +39,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/pwd_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

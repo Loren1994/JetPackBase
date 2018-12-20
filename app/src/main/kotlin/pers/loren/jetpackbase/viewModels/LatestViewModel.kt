@@ -1,5 +1,7 @@
 package pers.loren.jetpackbase.viewModels
 
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import pers.loren.jetpackbase.repository.LatestRepository
 
@@ -13,9 +15,16 @@ import pers.loren.jetpackbase.repository.LatestRepository
  */
 class LatestViewModel(val latestRepository: LatestRepository) : ViewModel() {
 
-    val data = latestRepository.data
+    var data: MutableLiveData<Any> = MutableLiveData()
 
-    fun getLatest() {
-        latestRepository.getLatestList()
+    val repoResult = Transformations.map(data) {
+        latestRepository.getPage()
+    }!!
+
+    val page = Transformations.switchMap(repoResult) { it }!!
+
+    fun showData() {
+        data.value = latestRepository.getPage()
     }
+
 }

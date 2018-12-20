@@ -6,17 +6,17 @@
         android:title="ONE" />
 
     <item
-        android:id="@+id/BFragment"
+        android:id="@id/BFragment"
         android:icon="@drawable/ic_warning_red"
         android:title="TWO" />
 
     <item
-        android:id="@+id/CFragment"
+        android:id="@id/CFragment"
         android:icon="@drawable/ic_warning_red"
         android:title="THREE" />
 
     <item
-        android:id="@+id/DFragment"
+        android:id="@id/DFragment"
         android:icon="@drawable/ic_warning_red"
         android:title="FOUR" />
 </menu>

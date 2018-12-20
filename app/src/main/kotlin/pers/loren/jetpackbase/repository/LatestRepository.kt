@@ -1,26 +1,26 @@
 package pers.loren.jetpackbase.repository
 
-import android.arch.lifecycle.MutableLiveData
-import com.google.gson.reflect.TypeToken
-import pers.loren.jetpackbase.base.ext.LATEST_URL
-import pers.loren.jetpackbase.base.ext.http
-import pers.loren.jetpackbase.base.ext.parseObject
+import android.arch.lifecycle.LiveData
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import pers.loren.jetpackbase.beans.LatestBean
+import pers.loren.jetpackbase.paging.LatestDataSourceFactory
 
 /**
  * Copyright © 2018/11/27 by loren
  */
 class LatestRepository {
-    var data: MutableLiveData<MutableList<LatestBean>> = MutableLiveData()
 
-    fun getLatestList() {
-        http {
-            url = LATEST_URL
-            success = {
-                val latestList = parseObject<MutableList<LatestBean>>(it, object : TypeToken<MutableList<LatestBean>>() {}.type)
-                data.postValue(latestList)
-            }
-            fail = { }
-        }
+    fun getPage(): LiveData<PagedList<LatestBean>> {
+        return LivePagedListBuilder(LatestDataSourceFactory(),
+                PagedList.Config.Builder()
+                        .setPageSize(20)
+                        .setEnablePlaceholders(true)
+                        .setInitialLoadSizeHint(20)
+                        .setPrefetchDistance(2)
+                        .build())
+                .build()
     }
+
+    // other http request
 }

@@ -1,6 +1,5 @@
 package pers.loren.jetpackbase.ui.fragment
 
-import android.content.Context
 import android.transition.AutoTransition
 import android.view.View
 import androidx.navigation.Navigation
@@ -12,10 +11,6 @@ import pers.loren.jetpackbase.base.ui.BaseFragment
  * Copyright © 2018/11/23 by loren
  */
 class RegisterFragment : BaseFragment() {
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
 
     override fun initWidgets() {
         sharedElementEnterTransition = AutoTransition()

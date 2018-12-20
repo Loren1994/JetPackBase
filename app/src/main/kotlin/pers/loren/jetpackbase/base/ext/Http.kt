@@ -115,7 +115,7 @@ private fun httpFailure(e: IOException, http: Http) {
 
 private fun httpResponse(response: Response, http: Http) {
     val result = response.body()?.string() ?: ""
-    json(result)
+//    json(result)
     val jo: JSONArray //JSONObject
     try {
         jo = JSONArray(result)

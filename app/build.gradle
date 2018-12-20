@@ -76,8 +76,10 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui:$navigation_version"
     //lifecycle
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:livedata:$lifecycle_version"
     //paging
     implementation "android.arch.paging:runtime:$paging_version"
+//    api 'android.arch.paging:rxjava2:1.0.1'
     //room
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
