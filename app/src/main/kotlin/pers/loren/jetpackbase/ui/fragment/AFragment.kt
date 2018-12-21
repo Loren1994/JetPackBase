@@ -10,11 +10,12 @@ import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.a_fragment.*
 import pers.loren.jetpackbase.R
 import pers.loren.jetpackbase.adapters.LatestAdapter
+import pers.loren.jetpackbase.base.ext.NetworkState
 import pers.loren.jetpackbase.base.ext.log
 import pers.loren.jetpackbase.base.ui.BaseFragment
 import pers.loren.jetpackbase.diff.LatestDiffItemCallback
 import pers.loren.jetpackbase.lifecycleObserver.LauncherObserver
-import pers.loren.jetpackbase.repository.LatestRepository
+import pers.loren.jetpackbase.repository.LatestRepositoryImpl
 import pers.loren.jetpackbase.viewModels.LatestViewModel
 
 
@@ -27,7 +28,7 @@ class AFragment : BaseFragment() {
     private val latestVM by lazy {
         ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return LatestViewModel(LatestRepository()) as T
+                return LatestViewModel(LatestRepositoryImpl()) as T
             }
         })[LatestViewModel::class.java]
     }
@@ -49,16 +50,16 @@ class AFragment : BaseFragment() {
         }
         latest_rv.adapter = mAdapter
         latestVM.page.observe(this, Observer {
-            log("UI:${it?.size}")
+            log("初始化LIST:${it?.size}")
             mAdapter.submitList(it)
-            swipe_layout.isRefreshing = false
+        })
+        latestVM.networkState.observe(this, Observer {
+            swipe_layout.isRefreshing = it == NetworkState.LOADING
         })
         swipe_layout.setOnRefreshListener {
-            log("刷新中")
-            latestVM.showData()
+           latestVM.refresh()
         }
-        swipe_layout.isRefreshing = true
-        swipe_layout.postDelayed({ latestVM.showData() }, 1000)
+        latestVM.showData()
     }
 
     override fun setListeners() {

@@ -6,8 +6,6 @@ import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import pers.victor.ext.isNetworkConnected
-import pers.victor.ext.spGetString
-import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
@@ -31,6 +29,11 @@ fun http(create: Http.() -> Unit) {
     if (h.body == null) httpGet(h) else httpPost(h)
 }
 
+fun httpGetBySync(create: Http.() -> Unit) {
+    val h = Http().apply { create() }
+    httpGetSync(h)
+}
+
 private fun httpGet(http: Http) {
     if (!isNetworkConnected()) {
         http.fail?.invoke("网络未连接")
@@ -40,32 +43,6 @@ private fun httpGet(http: Http) {
     val request = Request.Builder()
             .url(url)
             .build()
-//    var urlLog = "get: $url\n${request.headers()}"
-//    if ("?" in url) {
-//        val s = url.split("?").drop(1)[0]
-//        val params: String
-//        if ("&" in s) {
-//            val array = s.split("&")
-//            params = array.joinToString("\n") {
-//                val kv = it.split("=")
-//                if (kv.size > 1) {
-//                    "${kv[0]} = ${kv[1]}"
-//                } else {
-//                    "${kv[0]} = "
-//                }
-//            }
-//        } else {
-//            val kv = s.split("=")
-//            params = if (kv.size > 1) {
-//                "${kv[0]} = ${kv[1]}"
-//            } else {
-//                "${kv[0]} = "
-//            }
-//        }
-//
-//        urlLog += params
-//    }
-//    log(urlLog)
     client.newCall(request).enqueue(object : Callback {
         override fun onFailure(call: Call, e: IOException) {
             if (e.message != null && !e.message!!.contentEquals("Canceled"))
@@ -77,6 +54,23 @@ private fun httpGet(http: Http) {
             httpResponse(response, http)
         }
     })
+}
+
+fun httpGetSync(http: Http) {
+    if (!isNetworkConnected()) {
+        http.fail?.invoke("网络未连接")
+        return
+    }
+    val url = http.url
+    val request = Request.Builder()
+            .url(url)
+            .build()
+    val response = client.newCall(request).execute()
+    if (response.isSuccessful) {
+        httpResponse(response, http)
+    } else {
+        httpFailure(IOException(response.body().toString()), http)
+    }
 }
 
 private fun httpPost(http: Http) {
@@ -128,7 +122,7 @@ private fun httpResponse(response: Response, http: Http) {
 //    if (jo.has("statusCode")) {
 //        if ((jo.getInt("statusCode")) == 200) {
 //            handler.post {
-                http.success?.invoke(jo.toString())
+    http.success?.invoke(jo.toString())
 //            }
 //        } else {
 //            handler.post { http.fail?.invoke(jo.getString("statusMsg")) }

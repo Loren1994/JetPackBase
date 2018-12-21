@@ -3,7 +3,7 @@ package pers.loren.jetpackbase.viewModels
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import pers.loren.jetpackbase.repository.LatestRepository
+import pers.loren.jetpackbase.repository.LatestRepositoryImpl
 
 
 /**
@@ -13,18 +13,23 @@ import pers.loren.jetpackbase.repository.LatestRepository
  * 相反，ViewModel 调用相应的组件获取数据,然后将数据获取结果提供给 UI 控制器
  * 不要在 ViewModel 中引用 View 或者 Activity 的 context
  */
-class LatestViewModel(val latestRepository: LatestRepository) : ViewModel() {
+class LatestViewModel(val latestRepository: LatestRepositoryImpl) : ViewModel() {
 
-    var data: MutableLiveData<Any> = MutableLiveData()
+    private var data: MutableLiveData<Any> = MutableLiveData()
 
-    val repoResult = Transformations.map(data) {
-        latestRepository.getPage()
+    private val repoResult = Transformations.map(data) {
+        latestRepository.getPageWithSize(20)
     }!!
 
-    val page = Transformations.switchMap(repoResult) { it }!!
+    val page = Transformations.switchMap(repoResult) { it.pagedList }!!
+    val networkState = Transformations.switchMap(repoResult) { it.networkState }!!
+
+    fun refresh() {
+        repoResult.value?.refresh?.invoke()
+    }
 
     fun showData() {
-        data.value = latestRepository.getPage()
+        data.value = null
     }
 
 }
