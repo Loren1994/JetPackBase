@@ -17,6 +17,7 @@ import pers.loren.jetpackbase.diff.LatestDiffItemCallback
 import pers.loren.jetpackbase.lifecycleObserver.LauncherObserver
 import pers.loren.jetpackbase.repository.LatestRepositoryImpl
 import pers.loren.jetpackbase.viewModels.LatestViewModel
+import pers.victor.ext.toast
 
 
 /**
@@ -55,9 +56,10 @@ class AFragment : BaseFragment() {
         })
         latestVM.networkState.observe(this, Observer {
             swipe_layout.isRefreshing = it == NetworkState.LOADING
+            if (it == NetworkState.COMPLETE) toast("暂无更多")
         })
         swipe_layout.setOnRefreshListener {
-           latestVM.refresh()
+            latestVM.refresh()
         }
         latestVM.showData()
     }
