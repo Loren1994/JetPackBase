@@ -84,10 +84,15 @@ dependencies {
     implementation "android.arch.lifecycle:livedata:$lifecycle_version"
     //paging
     implementation "android.arch.paging:runtime:$paging_version"
-//    api 'android.arch.paging:rxjava2:1.0.1'
+//    implementation 'android.arch.paging:rxjava2:1.0.1'
     //room
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
+    //workManager
+//    implementation "android.arch.work:work-runtime:$work_version"
+    implementation "android.arch.work:work-runtime-ktx:$work_version"
+    // optional - Firebase JobDispatcher support
+//    implementation "android.arch.work:work-firebase:1.0.0-alpha11"
 }
 
 

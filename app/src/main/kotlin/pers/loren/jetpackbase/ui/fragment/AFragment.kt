@@ -25,10 +25,12 @@ import pers.victor.ext.toast
  */
 class AFragment : BaseFragment() {
 
+    private val aObserver by lazy { LauncherObserver("A") }
     private val mAdapter by lazy { LatestAdapter(LatestDiffItemCallback()) }
     private val latestVM by lazy {
         ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
                 return LatestViewModel(LatestRepositoryImpl()) as T
             }
         })[LatestViewModel::class.java]
@@ -38,7 +40,7 @@ class AFragment : BaseFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        lifecycle.addObserver(LauncherObserver("A"))
+        lifecycle.addObserver(aObserver)
     }
 
     override fun initWidgets() {
@@ -62,6 +64,11 @@ class AFragment : BaseFragment() {
             latestVM.refresh()
         }
         latestVM.showData()
+    }
+
+    override fun onStop() {
+        lifecycle.removeObserver(aObserver)
+        super.onStop()
     }
 
     override fun setListeners() {

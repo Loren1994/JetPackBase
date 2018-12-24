@@ -2,18 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/work_tv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="b fragment"
+        android:text="点我增加WorkerManager"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/param_tv"
-        android:layout_width="match_parent"
+        android:id="@+id/stop_tv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="点我停止WorkerManager所有任务"
         android:textSize="24sp" />
 
 </LinearLayout>
